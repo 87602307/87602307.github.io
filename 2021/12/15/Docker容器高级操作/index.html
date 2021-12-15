@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<html lang="cn" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> - Source Blog</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="Docker容器高级操作映射端口下载nginx:1.1...">
+  <meta name="author" content="source">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_r673sha78lq.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: '[object Object]'
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '心之所动，就随风去吧。',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+    
+
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/security/ " class="underline "> 安全</a>
+      </li><li class="menu-item">
+        <a href="/K8S/ " class="underline "> 云原生</a>
+      </li><li class="menu-item">
+        <a href="/tool/ " class="underline "> 工具</a>
+      </li><li class="menu-item">
+        <a href="/skill/ " class="underline "> 技能</a>
+      </li><li class="menu-item">
+        <a href="/categories/ " class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title"></h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 15, 2021</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>10836</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <h1 id="Docker容器高级操作"><a href="#Docker容器高级操作" class="headerlink" title="Docker容器高级操作"></a>Docker容器高级操作</h1><h2 id="映射端口"><a href="#映射端口" class="headerlink" title="映射端口"></a>映射端口</h2><h3 id="下载nginx-1-12-2"><a href="#下载nginx-1-12-2" class="headerlink" title="下载nginx:1.12.2"></a>下载nginx:1.12.2</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx:1.12.2</span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker pull nginx:1.12.2</span></span><br><span class="line">Trying to pull repository docker.io/library/nginx ... </span><br><span class="line">1.12.2: Pulling from docker.io/library/nginx</span><br><span class="line">f2aa67a397c4: Pull complete </span><br><span class="line">e3eaf3d87fe0: Pull complete </span><br><span class="line">38cb13c1e4c9: Pull complete </span><br><span class="line">Digest: sha256:72daaf46f11cc753c4eab981cbf869919bd1fee3d2170a2adeac12400f494728</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> docker.io/nginx:1.12.2</span><br></pre></td></tr></table></figure>
+
+<h3 id="映射端口-1"><a href="#映射端口-1" class="headerlink" title="映射端口"></a>映射端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 容器外端口:容器内端口</span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker images</span></span><br><span class="line">REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">wangxu                  latest              93e2c7fa8629        2 hours ago         5.55 MB</span><br><span class="line">docker.io/hello-world   latest              feb5d9fea6a5        3 weeks ago         13.3 kB</span><br><span class="line">hell-world              latest              feb5d9fea6a5        3 weeks ago         13.3 kB</span><br><span class="line">docker.io/alpine        latest              14119a10abf4        7 weeks ago         5.6 MB</span><br><span class="line">v1.0.3                  latest              965ea09ff2eb        24 months ago       5.55 MB</span><br><span class="line">docker.io/alpine        3.10.3              965ea09ff2eb        24 months ago       5.55 MB</span><br><span class="line">hackxu/nginx            v1.12.2             4037a5562b03        3 years ago         108 MB</span><br><span class="line">docker.io/nginx         1.12.2              4037a5562b03        3 years ago         108 MB</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker run --rm -d --name mynginx -p 81:80 hackxu/nginx:v1.12.2</span></span><br><span class="line">a979a60428df986e38390c812e6a3d676d30b4f5dc57ef081bd4408f836b2b5a</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker ps -a</span></span><br><span class="line">CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS                      PORTS                NAMES</span><br><span class="line">a979a60428df        hackxu/nginx:v1.12.2   <span class="string">&quot;nginx -g &#x27;daemon ...&quot;</span>   12 seconds ago      Up 11 seconds               0.0.0.0:81-&gt;80/tcp   mynginx</span><br><span class="line">f493774655e8        hello-world            <span class="string">&quot;/hello&quot;</span>                 18 minutes ago      Exited (0) 18 minutes ago                        fervent_bardeen</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># netstat -tunlp|grep 81</span></span><br><span class="line">tcp6       0      0 :::81                   :::*                    LISTEN      16660/docker-proxy- </span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># curl 127.0.0.1:81</span></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;Welcome to nginx!&lt;/title&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    body &#123;</span><br><span class="line">        width: 35em;</span><br><span class="line">        margin: 0 auto;</span><br><span class="line">        font-family: Tahoma, Verdana, Arial, sans-serif;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;</span><br><span class="line">&lt;p&gt;If you see this page, the nginx web server is successfully installed and</span><br><span class="line">working. Further configuration is required.&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;For online documentation and support please refer to</span><br><span class="line">&lt;a href=<span class="string">&quot;http://nginx.org/&quot;</span>&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;</span><br><span class="line">Commercial support is available at</span><br><span class="line">&lt;a href=<span class="string">&quot;http://nginx.com/&quot;</span>&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;&lt;em&gt;Thank you <span class="keyword">for</span> using nginx.&lt;/em&gt;&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="挂载数据卷"><a href="#挂载数据卷" class="headerlink" title="挂载数据卷"></a>挂载数据卷</h2><h3 id="宿主机操作"><a href="#宿主机操作" class="headerlink" title="宿主机操作"></a>宿主机操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#首先在宿主机创建html文件夹然后把百度首页保存下来</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># mkdir html</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># cd html/</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z html]<span class="comment"># wget www.baidu.com -O index.html</span></span><br><span class="line">--2021-10-16 15:45:16--  http://www.baidu.com/</span><br><span class="line">Resolving www.baidu.com (www.baidu.com)... 180.101.49.11, 180.101.49.12</span><br><span class="line">Connecting to www.baidu.com (www.baidu.com)|180.101.49.11|:80... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 2381 (2.3K) [text/html]</span><br><span class="line">Saving to: ‘index.html’</span><br><span class="line"></span><br><span class="line">100%[====================================================================&gt;] 2,381       --.-K/s   <span class="keyword">in</span> 0s      </span><br><span class="line"></span><br><span class="line">2021-10-16 15:45:16 (59.9 MB/s) - ‘index.html’ saved [2381/2381]</span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z html]<span class="comment"># cat index.html</span></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet <span class="built_in">type</span>=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css&gt;&lt;title&gt;百度一下，你就知道&lt;/title&gt;&lt;/head&gt; &lt;body link=<span class="comment">#0000cc&gt; &lt;div id=wrapper&gt; &lt;div id=head&gt; &lt;div class=head_wrapper&gt; &lt;div class=s_form&gt; &lt;div class=s_form_wrapper&gt; &lt;div id=lg&gt; &lt;img hidefocus=true src=//www.baidu.com/img/bd_logo1.png width=270 height=129&gt; &lt;/div&gt; &lt;form id=form name=f action=//www.baidu.com/s class=fm&gt; &lt;input type=hidden name=bdorz_come value=1&gt; &lt;input type=hidden name=ie value=utf-8&gt; &lt;input type=hidden name=f value=8&gt; &lt;input type=hidden name=rsv_bp value=1&gt; &lt;input type=hidden name=rsv_idx value=1&gt; &lt;input type=hidden name=tn value=baidu&gt;&lt;span class=&quot;bg s_ipt_wr&quot;&gt;&lt;input id=kw name=wd class=s_ipt value maxlength=255 autocomplete=off autofocus&gt;&lt;/span&gt;&lt;span class=&quot;bg s_btn_wr&quot;&gt;&lt;input type=submit id=su value=百度一下 class=&quot;bg s_btn&quot;&gt;&lt;/span&gt; &lt;/form&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=u1&gt; &lt;a href=http://news.baidu.com name=tj_trnews class=mnav&gt;新闻&lt;/a&gt; &lt;a href=http://www.hao123.com name=tj_trhao123 class=mnav&gt;hao123&lt;/a&gt; &lt;a href=http://map.baidu.com name=tj_trmap class=mnav&gt;地图&lt;/a&gt; &lt;a href=http://v.baidu.com name=tj_trvideo class=mnav&gt;视频&lt;/a&gt; &lt;a href=http://tieba.baidu.com name=tj_trtieba class=mnav&gt;贴吧&lt;/a&gt; &lt;noscript&gt; &lt;a href=http://www.baidu.com/bdorz/login.gif?login&amp;amp;tpl=mn&amp;amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb&gt;登录&lt;/a&gt; &lt;/noscript&gt; &lt;script&gt;document.write(&#x27;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#x27;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &#x27;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#x27;);&lt;/script&gt; &lt;a href=//www.baidu.com/more/ name=tj_briicon class=bri style=&quot;display: block;&quot;&gt;更多产品&lt;/a&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=ftCon&gt; &lt;div id=ftConw&gt; &lt;p id=lh&gt; &lt;a href=http://home.baidu.com&gt;关于百度&lt;/a&gt; &lt;a href=http://ir.baidu.com&gt;About Baidu&lt;/a&gt; &lt;/p&gt; &lt;p id=cp&gt;&amp;copy;2017&amp;nbsp;Baidu&amp;nbsp;&lt;a href=http://www.baidu.com/duty/&gt;使用百度前必读&lt;/a&gt;&amp;nbsp; &lt;a href=http://jianyi.baidu.com/ class=cp-feedback&gt;意见反馈&lt;/a&gt;&amp;nbsp;京ICP证030173号&amp;nbsp; &lt;img src=//www.baidu.com/img/gs.gif&gt; &lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="挂载数据卷-1"><a href="#挂载数据卷-1" class="headerlink" title="挂载数据卷"></a>挂载数据卷</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name nginx_with_baidu1 -d -p 82:80 -v /root/html:/usr/share/nginx/html hackxu/nginx:v1.12.2</span><br><span class="line"><span class="comment">#访问宿主机82端口，挂载成功</span></span><br></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://gitee.com/hackxu/img/raw/master/docker/202110161554090.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20211016155404761</span></p>
+<h3 id="进入docker容器查看"><a href="#进入docker容器查看" class="headerlink" title="进入docker容器查看"></a>进入docker容器查看</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@izbp11is3offkcp3qlbpk5z html]<span class="comment"># docker ps </span></span><br><span class="line">CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS              PORTS                NAMES</span><br><span class="line">9a207d6a5fd5        hackxu/nginx:v1.12.2   <span class="string">&quot;nginx -g &#x27;daemon ...&quot;</span>   6 minutes ago       Up 6 minutes        0.0.0.0:82-&gt;80/tcp   nginx_with_baidu1</span><br><span class="line">a979a60428df        hackxu/nginx:v1.12.2   <span class="string">&quot;nginx -g &#x27;daemon ...&quot;</span>   16 minutes ago      Up 16 minutes       0.0.0.0:81-&gt;80/tcp   mynginx</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z html]<span class="comment"># docker exec -ti 9a207 /bin/bash </span></span><br><span class="line">root@9a207d6a5fd5:/<span class="comment"># ls</span></span><br><span class="line">bin  boot  dev	etc  home  lib	lib64  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@9a207d6a5fd5:/<span class="comment"># cd /usr/share/nginx/html</span></span><br><span class="line">root@9a207d6a5fd5:/usr/share/nginx/html<span class="comment"># ls</span></span><br><span class="line">index.html  index.html.1</span><br><span class="line"><span class="comment">#原本是没有Index.html文件的，由于和宿主机的文件目录关联了所以就有了</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查看容器挂载情况"><a href="#查看容器挂载情况" class="headerlink" title="查看容器挂载情况"></a>查看容器挂载情况</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 容器ID|grep share</span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z html]<span class="comment"># docker inspect 9a207|grep share </span></span><br><span class="line">                <span class="string">&quot;/root/html:/usr/share/nginx/html&quot;</span></span><br><span class="line">                <span class="string">&quot;Destination&quot;</span>: <span class="string">&quot;/usr/share/nginx/html&quot;</span>,</span><br></pre></td></tr></table></figure>
+
+<h3 id="传递环境变量"><a href="#传递环境变量" class="headerlink" title="传递环境变量"></a>传递环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">docker run -e 环境变量键=环境变量值 镜像名称</span><br><span class="line">docker run --rm -e E_OPTS=wangxu wangxu:latest printenv</span><br><span class="line">docker run --rm -e E_OPTS=wangxu -e C_OPTS=xuxuxu wangxu:latest printenv</span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker run --rm -e E_OPTS=wangxu wangxu:latest printenv</span></span><br><span class="line">PATH=/usr/<span class="built_in">local</span>/sbin:/usr/<span class="built_in">local</span>/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line">HOSTNAME=5c0e3adda923</span><br><span class="line">E_OPTS=wangxu</span><br><span class="line">HOME=/root</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker run --rm  wangxu:latest printenv</span></span><br><span class="line">PATH=/usr/<span class="built_in">local</span>/sbin:/usr/<span class="built_in">local</span>/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line">HOSTNAME=83272e55957c</span><br><span class="line">HOME=/root</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker run --rm -e E_OPTS=wangxu -e C_OPTS=xuxuxu wangxu:latest printenv</span></span><br><span class="line">PATH=/usr/<span class="built_in">local</span>/sbin:/usr/<span class="built_in">local</span>/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line">HOSTNAME=ef6900e7785e</span><br><span class="line">E_OPTS=wangxu</span><br><span class="line">C_OPTS=xuxuxu</span><br><span class="line">HOME=/root</span><br></pre></td></tr></table></figure>
+
+<h3 id="更换apt源"><a href="#更换apt源" class="headerlink" title="更换apt源"></a>更换apt源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#备份原有的配置文件</span></span><br><span class="line">cp /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line"><span class="comment">#没有vi、vim等编辑器操作</span></span><br><span class="line"><span class="built_in">cd</span> /etc/apt/</span><br><span class="line"><span class="comment">#更换清华源</span></span><br><span class="line"><span class="built_in">echo</span> deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse &gt;&gt; sources.list</span><br><span class="line"> <span class="built_in">echo</span> deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse &gt;&gt; sources.list</span><br><span class="line"> <span class="built_in">echo</span> deb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse &gt;&gt; sources.list</span><br><span class="line"> <span class="built_in">echo</span> deb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse &gt;&gt; sources.list</span><br><span class="line"> <span class="built_in">echo</span> deb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse &gt;&gt; sources.list</span><br><span class="line"> <span class="built_in">echo</span> deb-src http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse &gt;&gt; sources.list</span><br><span class="line"> <span class="built_in">echo</span> deb-src http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse &gt;&gt; sources.list</span><br><span class="line"> <span class="built_in">echo</span> deb-src http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse &gt;&gt; sources.list</span><br><span class="line"> <span class="built_in">echo</span> deb-src http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse &gt;&gt; sources.list</span><br><span class="line"> <span class="built_in">echo</span> deb-src http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse &gt;&gt; sources.list</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="容器内安装软件"><a href="#容器内安装软件" class="headerlink" title="容器内安装软件"></a>容器内安装软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -ti nginx_with_baidu1 /bin/bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看源</span></span><br><span class="line">root@9a207d6a5fd5:/<span class="comment"># tee /etc/apt/source.list &lt;&lt; EOF</span></span><br><span class="line">&gt; </span><br><span class="line"></span><br><span class="line"><span class="comment">#apt安装curl</span></span><br><span class="line">apt-get update &amp;&amp; apt-get install curl -y</span><br><span class="line"></span><br><span class="line"><span class="comment">#将安装好curl的容器保存镜像并且上传</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker commit -p 9a hackxu/nginx:curl</span></span><br><span class="line">sha256:709a40786b42001723ac73251548e1fe850bc01284caad8e7bc4af1c8268f742</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker push hackxu/nginx:curl</span></span><br><span class="line">The push refers to a repository [docker.io/hackxu/nginx]</span><br><span class="line">9d4f7026bbce: Pushed </span><br><span class="line">4258832b2570: Mounted from library/nginx </span><br><span class="line">683a28d1d7fd: Mounted from library/nginx </span><br><span class="line">d626a8ad97a1: Mounted from library/nginx </span><br><span class="line">curl: digest: sha256:11472e51ab4d091ac8842ff5a145b40467d05a2aa3be1183be9cd1437a437429 size: 1160</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://gitee.com/hackxu/img/raw/master/docker/202110161822384.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20211016182244331</span></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>source</li>
+    <li><strong>本文链接：</strong><a href="http://example.com/2021/12/15/Docker%E5%AE%B9%E5%99%A8%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;12&#x2F;15&#x2F;Docker%E5%AE%B9%E5%99%A8%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;12&#x2F;15&#x2F;Docker%E5%AE%B9%E5%99%A8%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+          <section class="donate">
+  <div id="qrcode-donate">
+    <img   class="lazyload" data-original="https://pic.izhaoo.com/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+        
+  <nav class="nav">
+    <a></a>
+    <a href="/2021/12/15/Docker%E5%9F%BA%E7%A1%80/"><i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker%E5%AE%B9%E5%99%A8%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C"><span class="toc-text">Docker容器高级操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%A0%E5%B0%84%E7%AB%AF%E5%8F%A3"><span class="toc-text">映射端口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDnginx-1-12-2"><span class="toc-text">下载nginx:1.12.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%A0%E5%B0%84%E7%AB%AF%E5%8F%A3-1"><span class="toc-text">映射端口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD%E6%95%B0%E6%8D%AE%E5%8D%B7"><span class="toc-text">挂载数据卷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%BF%E4%B8%BB%E6%9C%BA%E6%93%8D%E4%BD%9C"><span class="toc-text">宿主机操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD%E6%95%B0%E6%8D%AE%E5%8D%B7-1"><span class="toc-text">挂载数据卷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5docker%E5%AE%B9%E5%99%A8%E6%9F%A5%E7%9C%8B"><span class="toc-text">进入docker容器查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E6%8C%82%E8%BD%BD%E6%83%85%E5%86%B5"><span class="toc-text">查看容器挂载情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E9%80%92%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">传递环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%8D%A2apt%E6%BA%90"><span class="toc-text">更换apt源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%86%85%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="toc-text">容器内安装软件</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=894519210 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://www.instagram.com/izhaoo/ "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#DA2E76'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconinstagram "></i>
+      </a><a 
+        href="https://github.com/zhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:izhaoo@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

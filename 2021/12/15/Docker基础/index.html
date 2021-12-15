@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html>
+<html lang="cn" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> - Source Blog</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="DokcerDocker 安装部署1234567891...">
+  <meta name="author" content="source">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_r673sha78lq.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: '[object Object]'
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '心之所动，就随风去吧。',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+    
+
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/security/ " class="underline "> 安全</a>
+      </li><li class="menu-item">
+        <a href="/K8S/ " class="underline "> 云原生</a>
+      </li><li class="menu-item">
+        <a href="/tool/ " class="underline "> 工具</a>
+      </li><li class="menu-item">
+        <a href="/skill/ " class="underline "> 技能</a>
+      </li><li class="menu-item">
+        <a href="/categories/ " class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title"></h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 15, 2021</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>13233</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <h1 id="Dokcer"><a href="#Dokcer" class="headerlink" title="Dokcer"></a>Dokcer</h1><h2 id="Docker-安装部署"><a href="#Docker-安装部署" class="headerlink" title="Docker 安装部署"></a>Docker 安装部署</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看内核版本</span></span><br><span class="line">uname -a</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看系统版本</span></span><br><span class="line">cat /etc/redhat-release</span><br><span class="line"></span><br><span class="line"><span class="comment">#关闭防火墙</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看内存</span></span><br><span class="line">free -m</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加Centos7的Base源</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo </span><br><span class="line"></span><br><span class="line"><span class="comment">#安装epel源</span></span><br><span class="line">yum install epel-release -y</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看epel源中docker的包</span></span><br><span class="line">yum list docker --show-duplicates</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加阿里镜像源</span></span><br><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装yum-utils</span></span><br><span class="line">yum install -y yum-utils</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装docker</span></span><br><span class="line">yum install -y docker-ce</span><br><span class="line">yum install docker</span><br><span class="line"></span><br><span class="line"><span class="comment">#开机自启动docker</span></span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动docker</span></span><br><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Docker配置"><a href="#Docker配置" class="headerlink" title="Docker配置"></a>Docker配置</h2><p><strong>Docker是一个典型的C/S架构</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#配置基础信息</span></span><br><span class="line">mkdir /etc/docker</span><br><span class="line">vim /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;graph&quot;</span>: <span class="string">&quot;/data/docker&quot;</span>,      <span class="comment">#工作目录地址</span></span><br><span class="line"><span class="string">&quot;storage-driver&quot;</span>: <span class="string">&quot;overlay2&quot;</span>,     </span><br><span class="line"><span class="string">&quot;insecure-registries&quot;</span>: [<span class="string">&quot;registry.access.redhat.com&quot;</span>, <span class="string">&quot;quay.io&quot;</span>],    <span class="comment">#不安全的仓库</span></span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://qwl75wjz.mirror.aliyuncs.com&quot;</span>],      <span class="comment">#仓库镜像源</span></span><br><span class="line"><span class="string">&quot;bip&quot;</span>: <span class="string">&quot;172.7.5.0/24&quot;</span>,      <span class="comment">#docker里的系统IP地址范围</span></span><br><span class="line"><span class="string">&quot;exec-opts&quot;</span>:[<span class="string">&quot;native.cgroupdriver=systemd&quot;</span>],     <span class="comment">#启动时的额外参数</span></span><br><span class="line"><span class="string">&quot;live-restore&quot;</span>: <span class="literal">true</span>      <span class="comment">#当容器引擎死了后，容器还能存活</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 配置项注意点：</span></span><br><span class="line"><span class="comment"># graph: 该关键字未来将被弃用，可以采用 &quot;data-root&quot; 替代</span></span><br><span class="line"><span class="comment"># storage-driver: 存储驱动，即分层文件系统</span></span><br><span class="line"><span class="comment"># insecure-registries: 不安全的docker registries，即使用http协议推拉镜象</span></span><br><span class="line"><span class="comment"># registry-mirrors: 加速站点，一般可以使用阿里、网易云、docker中国(https://registry.docker-cn.com)的地址</span></span><br><span class="line"><span class="comment"># bip: 指定docker bridge地址(不能以.0结尾)，生产中建议采用 172.xx.yy.1/24,其中xx.yy为宿主机ip后四位，方便定位问题</span></span><br><span class="line"><span class="comment"># 若启动失败，查看 /var/log/message 日志排错</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#重启docker</span></span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Docker指令"><a href="#Docker指令" class="headerlink" title="Docker指令"></a>Docker指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看docker基本信息</span></span><br><span class="line">docker info</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动第一个Docker容器</span></span><br><span class="line">docker run hello-world</span><br><span class="line"></span><br><span class="line">To generate this message, Docker took the following steps:</span><br><span class="line"> 1. The Docker client contacted the Docker daemon.</span><br><span class="line"> 2. The Docker daemon pulled the <span class="string">&quot;hello-world&quot;</span> image from the Docker Hub.</span><br><span class="line">    (amd64)</span><br><span class="line"> 3. The Docker daemon created a new container from that image <span class="built_in">which</span> runs the</span><br><span class="line">    executable that produces the output you are currently reading.</span><br><span class="line"> 4. The Docker daemon streamed that output to the Docker client, <span class="built_in">which</span> sent it</span><br><span class="line">    to your terminal.</span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker镜像"><a href="#Docker镜像" class="headerlink" title="Docker镜像"></a>Docker镜像</h2><h3 id="镜像结构"><a href="#镜像结构" class="headerlink" title="镜像结构"></a>镜像结构</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#镜像的结构：</span></span><br><span class="line">\<span class="variable">$&#123;registry_name&#125;</span>/<span class="variable">$&#123;repository_name&#125;</span>/\<span class="variable">$&#123;image_name&#125;</span>:\<span class="variable">$&#123;tag_name&#125;</span></span><br><span class="line"><span class="comment">#registry_name--远端仓库的url</span></span><br><span class="line"><span class="comment">#repository_name--仓库分类的名字</span></span><br><span class="line"><span class="comment">#image_name--镜像的名字</span></span><br><span class="line"><span class="comment">#tag_name--镜像标签的名字（一般以镜像的版本号或日期做标签）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#例如：</span></span><br><span class="line">docker.io/library/alpine:3.10.1</span><br></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://gitee.com/hackxu/img/raw/master/docker/docker.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image.png</span> </p>
+<h3 id="开源社区"><a href="#开源社区" class="headerlink" title="开源社区"></a>开源社区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Docker Hub</span></span><br><span class="line">https://registry.hub.docker.com/</span><br><span class="line"></span><br><span class="line"><span class="comment">#bash登录docker hub</span></span><br><span class="line">docker login docker.io</span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker login docker.io</span></span><br><span class="line">Login with your Docker ID to push and pull images from Docker Hub. If you don<span class="string">&#x27;t have a Docker ID, head over to https://hub.docker.com to create one.</span></span><br><span class="line"><span class="string">Username: hackxu</span></span><br><span class="line"><span class="string">Password: </span></span><br><span class="line"><span class="string">Login Succeeded</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker镜像操作"><a href="#Docker镜像操作" class="headerlink" title="Docker镜像操作"></a>Docker镜像操作</h2><h3 id="搜索镜像"><a href="#搜索镜像" class="headerlink" title="搜索镜像"></a>搜索镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bash 搜索镜像</span></span><br><span class="line">docker search alpine</span><br><span class="line">INDEX       NAME                                           DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">docker.io   docker.io/citizenstig/dvwa                     Docker container <span class="keyword">for</span> Damn Vulnerable Web A...   69                   [OK]</span><br><span class="line">docker.io   docker.io/infoslack/dvwa                                                                       11                   [OK]</span><br><span class="line">docker.io   docker.io/garland/dvwa                         Damn Vulnerable Web Application <span class="keyword">in</span> a Docke...   7                    [OK]</span><br><span class="line">docker.io   docker.io/sagikazarmark/dvwa                   DVWA (Damn Vulnerable Web Application) Doc...   6                    [OK]</span><br><span class="line">docker.io   docker.io/cytopia/dvwa                         DVWA (Damn Vulnerable Web Application) wit...   4                    </span><br><span class="line">docker.io   docker.io/astronaut1712/dvwa                   Docker <span class="keyword">for</span> DVWA LAB: https://github.com/Ra...   3                    [OK]</span><br><span class="line"><span class="comment">#docker hub搜索</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#默认使用最新镜像</span></span><br><span class="line">docker pull alpine</span><br><span class="line"></span><br><span class="line"><span class="comment">#下载指定tag</span></span><br><span class="line">docker pull alpine:3.10.3</span><br><span class="line"></span><br><span class="line"><span class="comment">#下载docker hub镜像时镜像结构中的url和仓库分类可以省略</span></span><br><span class="line"><span class="comment">#但是下载私有仓库的时候镜像结构必须写全</span></span><br><span class="line">docker pull docker.io/library/alpine:3.10.3</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看docker镜像</span></span><br><span class="line">docker images</span><br><span class="line">docker images ls</span><br><span class="line"></span><br><span class="line"><span class="comment">#给镜像打标签</span></span><br><span class="line">docker tag  镜像ID v1.0.3</span><br></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://gitee.com/hackxu/img/raw/master/docker/202110151757542.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20211015175746488</span></p>
+<h3 id="推送镜像"><a href="#推送镜像" class="headerlink" title="推送镜像"></a>推送镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#推送镜像,需要先登录docker.io</span></span><br><span class="line">docker push docker.io/hackxu/hello-world:hello</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看docker中有关hello的镜像</span></span><br><span class="line">docker images|grep hello</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker images|grep hello</span></span><br><span class="line">docker.io/hackxu/hello-world   hello               feb5d9fea6a5        3 weeks ago         13.3 kB</span><br><span class="line">docker.io/hello-world          hello               feb5d9fea6a5        3 weeks ago         13.3 kB</span><br><span class="line">docker.io/hello-world          latest              feb5d9fea6a5        3 weeks ago         13.3 kB</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除镜像只删除标签，如果还有一个标签共用这个镜像那么这个镜像还在</span></span><br><span class="line">docker rmi docker.io/hello-world:hello</span><br><span class="line"></span><br><span class="line"><span class="comment">#强制删除镜像，删除镜像ID</span></span><br><span class="line">docker rmi -f feb</span><br><span class="line"><span class="comment">#docker hub镜像还在不会被删除</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker镜像特性"><a href="#Docker镜像特性" class="headerlink" title="Docker镜像特性"></a>Docker镜像特性</h2><p><strong>镜像位于bootfs之上</strong></p>
+<p><strong>每一层镜像的下面一层镜像称为其父镜像（父子关系）</strong></p>
+<p><strong>第一层镜像为Base Image</strong></p>
+<p><strong>容器在最顶层</strong></p>
+<p><strong>其下的所有层都为readonly</strong></p>
+<p><strong>Docker将readonly的FS层称作“image”</strong></p>
+<p><img    class="lazyload" data-original="https://gitee.com/hackxu/img/raw/master/docker/202110151826180.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20211015182654016</span></p>
+<h2 id="Docker容器的基本操作"><a href="#Docker容器的基本操作" class="headerlink" title="Docker容器的基本操作"></a>Docker容器的基本操作</h2><h3 id="容器启动"><a href="#容器启动" class="headerlink" title="容器启动"></a>容器启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看本地运行的docker进程</span></span><br><span class="line">docker ps -a</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动容器</span></span><br><span class="line">docker run</span><br><span class="line"><span class="comment">#docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</span></span><br><span class="line">OPTIONS:选项</span><br><span class="line">-i:表示启动一个可交互的容器，并持续打开标准输入</span><br><span class="line">-t:表示使用终端关联到容器的标准输入输出上</span><br><span class="line">-d:表示将容器放置后台运行</span><br><span class="line">-rm:退出后即删除容器</span><br><span class="line">-name:表示定义容器的唯一名称（重复起同一个名称会报错）</span><br><span class="line">IMAGE:表示要运行的镜像</span><br><span class="line">COMMAND：表示启动容器时要运行的命令</span><br></pre></td></tr></table></figure>
+
+<h3 id="交互式启动一个容器"><a href="#交互式启动一个容器" class="headerlink" title="交互式启动一个容器"></a>交互式启动一个容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动后进入docker可交互终端</span></span><br><span class="line">docker run -ti docker.io/alpine:3.10.3 /bin/sh</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker run -ti docker.io/alpine:3.10.3 /bin/sh</span></span><br><span class="line">/ <span class="comment"># </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="非交互式启动容器"><a href="#非交互式启动容器" class="headerlink" title="非交互式启动容器"></a>非交互式启动容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动这个镜像运行echo hello后删除该容器</span></span><br><span class="line">docekr run --rm docker.io/alpine:3.10.3 /bin/<span class="built_in">echo</span> hello</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker run --rm docker.io/alpine:3.10.3 /bin/echo hello</span></span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+
+<h3 id="非交互式启动一个后台容器"><a href="#非交互式启动一个后台容器" class="headerlink" title="非交互式启动一个后台容器"></a>非交互式启动一个后台容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#后台运行docker</span></span><br><span class="line">docker run -d --name myalpine docker.io/alpine:3.10.3</span><br><span class="line"><span class="comment">#这个命令运行完之后容器就退出了，因为没有任务</span></span><br><span class="line">CONTAINER ID        IMAGE                     COMMAND             CREATED             STATUS                      PORTS               NAMES</span><br><span class="line">f30fd08a037f        docker.io/alpine:3.10.3   <span class="string">&quot;/bin/sh&quot;</span>           17 seconds ago      Exited (0) 17 seconds ago      </span><br><span class="line"></span><br><span class="line"><span class="comment">#让他睡300秒先,此时再看就是up状态，300秒后就退出了</span></span><br><span class="line">docker run -d --name myalpine docker.io/alpine:3.10.3 /bin/sleep 300</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE                     COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">ae739c139caa        docker.io/alpine:3.10.3   <span class="string">&quot;/bin/sleep 300&quot;</span>    4 seconds ago       Up 3 seconds                            myalpine1</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看宿主机进程</span></span><br><span class="line">ps aux|grep  sleep|grep -v grep</span><br><span class="line"><span class="comment">#grep -v 是反向文本选择，选择文本中不存在该字符串的那一条</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># ps aux|grep  sleep</span></span><br><span class="line">root      7515  0.0  0.0   1540   248 ?        Ss   23:52   0:00 /bin/sleep 300</span><br><span class="line">root      7566  0.0  0.0 112812   976 pts/0    S+   23:53   0:00 grep --color=auto sleep</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># ps aux|grep  sleep|grep -v grep</span></span><br><span class="line">root      7515  0.0  0.0   1540   248 ?        Ss   23:52   0:00 /bin/sleep 300</span><br></pre></td></tr></table></figure>
+
+<h3 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -ti 容器ID /bin/sh</span><br><span class="line">docker <span class="built_in">exec</span> -ti 容器ID /bin/bash</span><br><span class="line"></span><br><span class="line">docker ps</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE                     COMMAND             CREATED              STATUS              PORTS               NAMES</span><br><span class="line">2161dad7d7c0        docker.io/alpine:3.10.3   <span class="string">&quot;/bin/sleep 300&quot;</span>    About a minute ago   Up About a minute                       myalpine2</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker exec -ti 216 /bin/sh</span></span><br><span class="line">/ <span class="comment"># echo hello</span></span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+
+<h3 id="容器停止"><a href="#容器停止" class="headerlink" title="容器停止"></a>容器停止</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器ID</span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE                     COMMAND             CREATED              STATUS              PORTS               NAMES</span><br><span class="line">2161dad7d7c0        docker.io/alpine:3.10.3   <span class="string">&quot;/bin/sleep 300&quot;</span>    About a minute ago   Up About a minute                       myalpine2</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># ^C</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE                     COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">2161dad7d7c0        docker.io/alpine:3.10.3   <span class="string">&quot;/bin/sleep 300&quot;</span>    2 minutes ago       Up 2 minutes                            myalpine2</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker stop 216</span></span><br><span class="line">216</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br></pre></td></tr></table></figure>
+
+<h3 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker restart 容器ID</span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker restart myalpine1</span></span><br><span class="line">myalpine1</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE                     COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">ae739c139caa        docker.io/alpine:3.10.3   <span class="string">&quot;/bin/sleep 300&quot;</span>    9 minutes ago       Up 3 seconds                            myalpine1</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除镜像是rmi（remove image）删除容器是（rm)注意区分</span></span><br><span class="line"><span class="comment">#加上-f表示强制删除，可以删除正在运行中的docker容器</span></span><br><span class="line">docker rm -f 容器ID</span><br><span class="line"></span><br><span class="line"><span class="comment">#将宿主机上所有退出的容器删除</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `docker ps -a|grep -i <span class="built_in">exit</span>|awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>`;<span class="keyword">do</span> docker rm -f <span class="variable">$i</span>;<span class="keyword">done</span></span><br><span class="line">docker rm `docker ps -a -q`  这个更简单</span><br></pre></td></tr></table></figure>
+
+<h3 id="从容器固化镜像"><a href="#从容器固化镜像" class="headerlink" title="从容器固化镜像"></a>从容器固化镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#当对docker 容器做了某些操作后想保存这个状态的镜像，不至于停止该容器后操作也没有了，所有要将这个镜像固化一下</span></span><br><span class="line"><span class="comment">#修改保存容器</span></span><br><span class="line">docker commit -p 容器名 新的镜像名</span><br></pre></td></tr></table></figure>
+
+<h2 id="导入-导出镜像"><a href="#导入-导出镜像" class="headerlink" title="导入/导出镜像"></a>导入/导出镜像</h2><h3 id="导出镜像"><a href="#导出镜像" class="headerlink" title="导出镜像"></a>导出镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">docker save image_name/image_id &gt; xxx.tar</span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE                     COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">289c09421ffd        docker.io/alpine:3.10.3   <span class="string">&quot;/bin/sleep 3000&quot;</span>   2 minutes ago       Up 2 minutes                            reverent_roentgen</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker commit -p 289 wangxu </span></span><br><span class="line">sha256:93e2c7fa8629f18fc90762218cbc7d98e20b36026fa27d641efa7a7349997b96</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker save wangxu  &gt;wangxu.tar</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREAT++ED             SIZE</span><br><span class="line">wangxu              latest              93e2c7fa8629        13 seconds ago      5.55 MB</span><br><span class="line">docker.io/alpine    latest              14119a10abf4        7 weeks ago         5.6 MB</span><br><span class="line">docker.io/alpine    3.10.3              965ea09ff2eb        24 months ago       5.55 MB</span><br><span class="line">v1.0.3              latest              965ea09ff2eb        24 months ago       5.55 MB</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="导入镜像"><a href="#导入镜像" class="headerlink" title="导入镜像"></a>导入镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">docker load -i xxx.tar </span><br><span class="line">docker load &lt; xxx.tar</span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">docker.io/alpine    latest              14119a10abf4        7 weeks ago         5.6 MB</span><br><span class="line">docker.io/alpine    3.10.3              965ea09ff2eb        24 months ago       5.55 MB</span><br><span class="line">v1.0.3              latest              965ea09ff2eb        24 months ago       5.55 MB</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker load &lt; wangxu.tar</span></span><br><span class="line">7ee222abe2d9: Loading layer [==================================================&gt;]  2.56 kB/2.56 kB</span><br><span class="line">Loaded image: wangxu:latest</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">wangxu              latest              93e2c7fa8629        2 minutes ago       5.55 MB</span><br><span class="line">docker.io/alpine    latest              14119a10abf4        7 weeks ago         5.6 MB</span><br><span class="line">docker.io/alpine    3.10.3              965ea09ff2eb        24 months ago       5.55 MB</span><br><span class="line">v1.0.3              latest              965ea09ff2eb        24 months ago       5.55 MB</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="查看容器日志"><a href="#查看容器日志" class="headerlink" title="查看容器日志"></a>查看容器日志</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">docker logs 容器ID</span><br><span class="line">docker logs -f 容器ID <span class="comment">#不断地打印日志文件</span></span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker images</span></span><br><span class="line">REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">wangxu                  latest              93e2c7fa8629        2 hours ago         5.55 MB</span><br><span class="line">docker.io/hello-world   latest              feb5d9fea6a5        3 weeks ago         13.3 kB</span><br><span class="line">hell-world              latest              feb5d9fea6a5        3 weeks ago         13.3 kB</span><br><span class="line">docker.io/alpine        latest              14119a10abf4        7 weeks ago         5.6 MB</span><br><span class="line">docker.io/alpine        3.10.3              965ea09ff2eb        24 months ago       5.55 MB</span><br><span class="line">v1.0.3                  latest              965ea09ff2eb        24 months ago       5.55 MB</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker run hello-world 2&gt;&amp;1 &gt;&gt;/dev/null</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker ps -a</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS                          PORTS               NAMES</span><br><span class="line">f493774655e8        hello-world         <span class="string">&quot;/hello&quot;</span>            About a minute ago   Exited (0) About a minute ago                       fervent_bardeen</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># docker logs f49</span></span><br><span class="line">Hello from Docker!</span><br><span class="line">This message shows that your installation appears to be working correctly.</span><br><span class="line">To generate this message, Docker took the following steps:</span><br><span class="line"> 1. The Docker client contacted the Docker daemon.</span><br><span class="line"> 2. The Docker daemon pulled the <span class="string">&quot;hello-world&quot;</span> image from the Docker Hub.</span><br><span class="line">    (amd64)</span><br><span class="line"> 3. The Docker daemon created a new container from that image <span class="built_in">which</span> runs the</span><br><span class="line">    executable that produces the output you are currently reading.</span><br><span class="line"> 4. The Docker daemon streamed that output to the Docker client, <span class="built_in">which</span> sent it</span><br><span class="line">    to your terminal.</span><br><span class="line">To try something more ambitious, you can run an Ubuntu container with:</span><br><span class="line"> $ docker run -it ubuntu bash</span><br><span class="line">Share images, automate workflows, and more with a free Docker ID:</span><br><span class="line"> https://hub.docker.com/</span><br><span class="line">For more examples and ideas, visit:</span><br><span class="line"> https://docs.docker.com/get-started/</span><br><span class="line"><span class="comment"># docker run hello-world 2&gt;&amp;1 &gt;&gt;/dev/null将输出重定向到黑洞</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>source</li>
+    <li><strong>本文链接：</strong><a href="http://example.com/2021/12/15/Docker%E5%9F%BA%E7%A1%80/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;12&#x2F;15&#x2F;Docker%E5%9F%BA%E7%A1%80&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;12&#x2F;15&#x2F;Docker%E5%9F%BA%E7%A1%80&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+          <section class="donate">
+  <div id="qrcode-donate">
+    <img   class="lazyload" data-original="https://pic.izhaoo.com/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+        
+  <nav class="nav">
+    <a href="/2021/12/15/Docker%E5%AE%B9%E5%99%A8%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/"><i class="iconfont iconleft"></i></a>
+    <a href="/2021/12/15/Docker%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/"><i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Dokcer"><span class="toc-text">Dokcer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2"><span class="toc-text">Docker 安装部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E9%85%8D%E7%BD%AE"><span class="toc-text">Docker配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E6%8C%87%E4%BB%A4"><span class="toc-text">Docker指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E9%95%9C%E5%83%8F"><span class="toc-text">Docker镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E7%BB%93%E6%9E%84"><span class="toc-text">镜像结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA"><span class="toc-text">开源社区</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E9%95%9C%E5%83%8F%E6%93%8D%E4%BD%9C"><span class="toc-text">Docker镜像操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E9%95%9C%E5%83%8F"><span class="toc-text">搜索镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="toc-text">拉取镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E9%80%81%E9%95%9C%E5%83%8F"><span class="toc-text">推送镜像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E9%95%9C%E5%83%8F%E7%89%B9%E6%80%A7"><span class="toc-text">Docker镜像特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E5%AE%B9%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-text">Docker容器的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8"><span class="toc-text">容器启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AA%E5%AE%B9%E5%99%A8"><span class="toc-text">交互式启动一个容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="toc-text">非交互式启动容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AA%E5%90%8E%E5%8F%B0%E5%AE%B9%E5%99%A8"><span class="toc-text">非交互式启动一个后台容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8"><span class="toc-text">进入容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%81%9C%E6%AD%A2"><span class="toc-text">容器停止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8"><span class="toc-text">重启容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8"><span class="toc-text">删除容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%AE%B9%E5%99%A8%E5%9B%BA%E5%8C%96%E9%95%9C%E5%83%8F"><span class="toc-text">从容器固化镜像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BA%E9%95%9C%E5%83%8F"><span class="toc-text">导入&#x2F;导出镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E9%95%9C%E5%83%8F"><span class="toc-text">导出镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E9%95%9C%E5%83%8F"><span class="toc-text">导入镜像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97"><span class="toc-text">查看容器日志</span></a></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=894519210 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://www.instagram.com/izhaoo/ "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#DA2E76'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconinstagram "></i>
+      </a><a 
+        href="https://github.com/zhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:izhaoo@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,442 @@
+
+
+<!DOCTYPE html>
+<html lang="cn" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> - Source Blog</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="Dockerfile容器的生命周期
+检查本地是否存在镜...">
+  <meta name="author" content="source">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_r673sha78lq.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: '[object Object]'
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '心之所动，就随风去吧。',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+    
+
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/security/ " class="underline "> 安全</a>
+      </li><li class="menu-item">
+        <a href="/K8S/ " class="underline "> 云原生</a>
+      </li><li class="menu-item">
+        <a href="/tool/ " class="underline "> 工具</a>
+      </li><li class="menu-item">
+        <a href="/skill/ " class="underline "> 技能</a>
+      </li><li class="menu-item">
+        <a href="/categories/ " class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title"></h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 15, 2021</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>6635</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <h1 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h1><h2 id="容器的生命周期"><a href="#容器的生命周期" class="headerlink" title="容器的生命周期"></a>容器的生命周期</h2><blockquote>
+<p><strong>检查本地是否存在镜像，如果不存在即从远端仓库检索</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>利用镜像启动容器</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>分配一个文件系统，并在只读的镜像层外挂在一层可读写层</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>从宿主机配置的网桥接口中桥接一个虚拟接口到容器</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>从地址池配置一个IP地址给容器</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>执行用户指定的指令</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>执行完毕后容器终止</strong></p>
+</blockquote>
+<h2 id="构建Docker镜像的途径"><a href="#构建Docker镜像的途径" class="headerlink" title="构建Docker镜像的途径"></a>构建Docker镜像的途径</h2><p><img    class="lazyload" data-original="https://gitee.com/hackxu/img/raw/master/docker/202110162204681.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20211016220412585</span></p>
+<h2 id="Dockerfile的规则"><a href="#Dockerfile的规则" class="headerlink" title="Dockerfile的规则"></a>Dockerfile的规则</h2><p><strong>格式</strong></p>
+<blockquote>
+<p>#为注释<br>指令（大学）内容（小写）<br>尽管指令是大小写不敏感的，但是，我们强烈建议指令用大写，内容用小写表示</p>
+</blockquote>
+<p><strong>Docker是按顺序执行Dockerfile里的指令集合的（从上到下依次执行）</strong></p>
+<p><strong>每一个Dockerfile的第一个非注释行指令，必须是“FROM”指令，用于为镜像文件构建过程中，指定基准镜像，后续的指令运行于次基准镜像所提供的运行环境之中</strong></p>
+<p><strong>实践中，基准镜像可以是任何可用的镜像文件，默认情况下，docker build会在docker主机（本地）上查找指定的镜像文件，当其在本地不存在时，则会从Docker registry(远端)上拉取所需镜像文件</strong></p>
+<h2 id="4组核心的Dcokerfile指令"><a href="#4组核心的Dcokerfile指令" class="headerlink" title="4组核心的Dcokerfile指令"></a>4组核心的Dcokerfile指令</h2><p><strong>USER/WORKDIR指令</strong></p>
+<p><strong>ADD/EXPOSE指令</strong></p>
+<p><strong>RUN/ENV指令</strong></p>
+<p><strong>CMD/ENTRYPOINT指令</strong></p>
+<h3 id="USER-WORKDIR指令"><a href="#USER-WORKDIR指令" class="headerlink" title="USER/WORKDIR指令"></a>USER/WORKDIR指令</h3><p><strong>vi /data/dockerfile/Dockerfile</strong></p>
+<blockquote>
+<p>FROM hackxu/nginx:v1.12.2<br>USER nginx<br>WORKDIR /usr/share/nginx/html</p>
+</blockquote>
+<p>#USER指定docker容器运行的身份</p>
+<p>#WORKDIR指定docker容器运行的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#编辑Dockerfile文件</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]<span class="comment"># docker images</span></span><br><span class="line">hackxu/nginx            v1.12.2             4037a5562b03        3 years ago         108 MB</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># mkdir data</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]<span class="comment"># cd data/</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z data]<span class="comment"># mkdir dockerfile</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z data]<span class="comment"># cd dockerfile</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]<span class="comment"># vi Dockerfile</span></span><br><span class="line">FROM hackxu/nginx:v1.12.2</span><br><span class="line">USER nginx</span><br><span class="line">WORKDIR /usr/share/nginx/html</span><br><span class="line"><span class="comment">#ESC :wq 保存退出</span></span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">利用Dockerfile构建镜像 . 在当前目录下 -t 加tag</span></span><br><span class="line">docker build . -t hackxu/nginx:v1.12.2_with_user_workdir</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# docker build . -t hackxu/nginx:v1.12.2_with_user_workdir</span><br><span class="line">Sending build context to Docker daemon 2.048 kB</span><br><span class="line">Step 1/3 : FROM hackxu/nginx:v1.12.2</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> 4037a5562b03</span></span><br><span class="line">Step 2/3 : USER nginx</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> Running <span class="keyword">in</span> f62fe60a3e21</span></span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> 259331589bbf</span></span><br><span class="line">Removing intermediate container f62fe60a3e21</span><br><span class="line">Step 3/3 : WORKDIR /usr/share/nginx/html</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> 6a863521c0d6</span></span><br><span class="line">Removing intermediate container 47811c612be4</span><br><span class="line">Successfully built 6a863521c0d6</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">成功生成一个镜像</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# docker images</span><br><span class="line">REPOSITORY              TAG                         IMAGE ID            CREATED             SIZE</span><br><span class="line">hackxu/nginx            v1.12.2_with_user_workdir   6a863521c0d6        6 minutes ago       108 MB</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">运行生成的镜像</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# sudo docker run --rm -ti --name test hackxu/nginx:v1.12.2_with_user_workdir /bin/bash</span><br><span class="line">nginx@8e4cb004e173:/usr/share/nginx/html$ whoami</span><br><span class="line">nginx</span><br><span class="line">nginx@8e4cb004e173:/usr/share/nginx/html$ pwd</span><br><span class="line">/usr/share/nginx/html</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="ADD-EXPOSE指令"><a href="#ADD-EXPOSE指令" class="headerlink" title="ADD/EXPOSE指令"></a>ADD/EXPOSE指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">先把之前生成的百度首页的index.html拷贝到/data/dockerfile/文件夹下</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# cp /root/html/index.html .</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# ls</span><br><span class="line">Dockerfile  index.html</span><br></pre></td></tr></table></figure>
+
+<p><strong>vi /data/dockerfile/Dockerfile</strong></p>
+<blockquote>
+<p>FROM hackxu/nginx:v1.12.2<br>ADD index.html /usr/share/nginx/html/index.html<br>EXPOSE 80</p>
+</blockquote>
+<p>#ADD将文件夹下的index文件固化到容器中的指定文件夹下</p>
+<p>#EXPOSE将端口映射出去</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">编辑Dockerfile文件</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z ~]# cd data/</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z data]# cd dockerfile</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# vi Dockerfile</span><br><span class="line">FROM hackxu/nginx:v1.12.2</span><br><span class="line">ADD index.html /usr/share/nginx/html/index.html</span><br><span class="line">EXPOSE 80</span><br><span class="line"><span class="meta">#</span><span class="bash">ESC :wq 保存退出</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">利用Dockerfile构建镜像</span> </span><br><span class="line"><span class="meta">#</span><span class="bash">docker run -P 大P表示在宿主机随机起一个映射端口，小p 宿主机端口:容器端口</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# docker build . -t hackxu/nginx:v1.12.2_with_index_expose </span><br><span class="line">Sending build context to Docker daemon  5.12 kB</span><br><span class="line">Step 1/3 : FROM hackxu/nginx:v1.12.2</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> 4037a5562b03</span></span><br><span class="line">Step 2/3 : ADD index.html /usr/share/nginx/html/index.html</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> e6d628dd295f</span></span><br><span class="line">Removing intermediate container 637cadf4ece8</span><br><span class="line">Step 3/3 : EXPOSE 80</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> Running <span class="keyword">in</span> a1dba8535df4</span></span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> 9dd47002cc55</span></span><br><span class="line">Removing intermediate container a1dba8535df4</span><br><span class="line">Successfully built 9dd47002cc55</span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# docker run -ti --rm --name test -p 83:80 hackxu/nginx:v1.12.2_with_index_expose /bin/bash</span><br><span class="line">root@51425000bdff:/# whoami</span><br><span class="line">root</span><br><span class="line">root@51425000bdff:/# pwd</span><br><span class="line">/</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">下面要在容器内运行nginx -g <span class="string">&quot;daemon off;&quot;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">因为nginx默认是以后台模式启动的，Docker未执行自定义的CMD之前，nginx的pid是1，执行到CMD之后，nginx就在后台运行，bash或sh脚本的pid变成了1。所以一旦执行完自定义CMD，nginx容器也就退出了。为了保持nginx的容器不退出，应该关闭nginx后台运行</span></span><br><span class="line"><span class="meta">#</span><span class="bash">或者直接-d后台运行，不要进入bash</span></span><br><span class="line"></span><br><span class="line">root@2982e72f2339:/# nginx -g &quot;daemon off;&quot;</span><br><span class="line">223.65.145.140 - - [16/Oct/2021:15:12:47 +0000] &quot;GET / HTTP/1.1&quot; 200 2381 &quot;-&quot; &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36&quot; &quot;-&quot;</span><br><span class="line">2021/10/16 15:12:47 [error] 9#9: *1 open() &quot;/usr/share/nginx/html/favicon.ico&quot; failed (2: No such file or directory), client: 223.65.145.140, server: localhost, request: &quot;GET /favicon.ico HTTP/1.1&quot;, host: &quot;47.98.242.152:83&quot;, referrer: &quot;http://47.98.242.152:83/&quot;</span><br><span class="line">223.65.145.140 - - [16/Oct/2021:15:12:47 +0000] &quot;GET /favicon.ico HTTP/1.1&quot; 404 571 &quot;http://47.98.242.152:83/&quot; &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36&quot; &quot;-&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>nginx -g “daemon off;”参考[<a target="_blank" rel="noopener" href="https://blog.csdn.net/code_runner/article/details/50879007]">https://blog.csdn.net/code_runner/article/details/50879007]</a></p>
+<p><img    class="lazyload" data-original="https://gitee.com/hackxu/img/raw/master/docker/202110162317111.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20211016231750044</span></p>
+<h3 id="RUN-ENV指令"><a href="#RUN-ENV指令" class="headerlink" title="RUN/ENV指令"></a>RUN/ENV指令</h3><p><strong>vi /data/dockerfile/Dockerfile</strong></p>
+<blockquote>
+<p>FROM centos：centos7<br>ENV VER 123123<br>RUN yum install bind -y</p>
+</blockquote>
+<p>#ENV指定环境变量键值</p>
+<p>#RUN在构建镜像时执行一些命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">利用Dockerfile构建镜像</span> </span><br><span class="line">docker build . -t hackxu/bind:v9.9.4_with_env_run</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">运行镜像</span></span><br><span class="line">docker run --rm -it hackxu/bind:v9.9.4_with_env_run /bin/bash</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">系统变量已经写入，<span class="built_in">bind</span>已经安装</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# docker run --rm -it hackxu/bind:v9.9.4_with_env_run /bin/bash</span><br><span class="line">[root@91afd5996262 /]# rpm -qa bind</span><br><span class="line">bind-9.11.4-26.P2.el7_9.7.x86_64</span><br><span class="line">[root@91afd5996262 /]# echo $VER</span><br><span class="line">9.9.4-74.el7_6.1</span><br></pre></td></tr></table></figure>
+
+<p><strong>“rpm -qa 软件名”可以查找是否安装软件已经软件版本</strong></p>
+<h3 id="CMD-ENTRYPOINT指令"><a href="#CMD-ENTRYPOINT指令" class="headerlink" title="CMD/ENTRYPOINT指令"></a>CMD/ENTRYPOINT指令</h3><h4 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h4><p><strong>vi /data/dockerfile/Dockerfile</strong></p>
+<blockquote>
+<p>FROM centos:centos7</p>
+<p>RUN yum install httpd -y</p>
+<p>CMD [“httpd”,”-D”,”FOREGROUND”]</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">利用Dockerfile构建镜像</span> </span><br><span class="line">docker build . -t hackxu/http:test</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">运行镜像将端口映射到宿主机的82端口</span></span><br><span class="line"><span class="meta">#</span><span class="bash">要加-d 不加会报错的</span></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# docker run --rm -d --name httptest2 -p82:80 hackxu/http:test1 </span><br></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://gitee.com/hackxu/img/raw/master/docker/202110170002007.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20211017000227899</span></p>
+<h4 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h4><p><strong>首先在/data/dockerfile/文件夹下创建一个entrypoint.sh文件</strong></p>
+<p><strong>entrypiont.sh文件内容</strong>：</p>
+<blockquote>
+<p>#!/bin/bash</p>
+<p>/sbin/nginx -g “daemon off;”</p>
+</blockquote>
+<p><strong>vi /data/dockerfile/Dockerfile写入</strong></p>
+<blockquote>
+<p>FROM centos:centos7<br>ADD entrypoint.sh /entrypoint.sh<br>RUN yum install epel-release -q -y &amp;&amp; yum install nginx -y<br>ENTRYPOINT /entrypoint.sh</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">利用Dockerfile构建镜像</span> </span><br><span class="line">docker build . -t hackxu/nginx:v1.12.2 </span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# docker images</span><br><span class="line">REPOSITORY              TAG                         IMAGE ID            CREATED             SIZE</span><br><span class="line">hackxu/nginx            mynginx                     b5e277ae7c9c        35 seconds ago      420 MB</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">运行镜像将端口映射到宿主机的83端口</span></span><br><span class="line">docker run --rm  -d --name nginxtest -p83:80 hackxu/nginx:mynginx</span><br><span class="line"></span><br><span class="line">[root@izbp11is3offkcp3qlbpk5z dockerfile]# docker run --rm --name nginxtest -p83:80 hackxu/nginx:mynginx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://gitee.com/hackxu/img/raw/master/docker/202110171415591.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">image-20211017141524390</span></p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>source</li>
+    <li><strong>本文链接：</strong><a href="http://example.com/2021/12/15/Dockerfile/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;12&#x2F;15&#x2F;Dockerfile&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;12&#x2F;15&#x2F;Dockerfile&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+          <section class="donate">
+  <div id="qrcode-donate">
+    <img   class="lazyload" data-original="https://pic.izhaoo.com/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+        
+  <nav class="nav">
+    <a href="/2021/12/15/Docker%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/"><i class="iconfont iconleft"></i></a>
+    <a href="/2021/12/15/hello-world/">Hello World<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Dockerfile"><span class="toc-text">Dockerfile</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">容器的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BADocker%E9%95%9C%E5%83%8F%E7%9A%84%E9%80%94%E5%BE%84"><span class="toc-text">构建Docker镜像的途径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dockerfile%E7%9A%84%E8%A7%84%E5%88%99"><span class="toc-text">Dockerfile的规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E7%BB%84%E6%A0%B8%E5%BF%83%E7%9A%84Dcokerfile%E6%8C%87%E4%BB%A4"><span class="toc-text">4组核心的Dcokerfile指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#USER-WORKDIR%E6%8C%87%E4%BB%A4"><span class="toc-text">USER&#x2F;WORKDIR指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADD-EXPOSE%E6%8C%87%E4%BB%A4"><span class="toc-text">ADD&#x2F;EXPOSE指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RUN-ENV%E6%8C%87%E4%BB%A4"><span class="toc-text">RUN&#x2F;ENV指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMD-ENTRYPOINT%E6%8C%87%E4%BB%A4"><span class="toc-text">CMD&#x2F;ENTRYPOINT指令</span></a></li></ol></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=894519210 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://www.instagram.com/izhaoo/ "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#DA2E76'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconinstagram "></i>
+      </a><a 
+        href="https://github.com/zhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:izhaoo@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
